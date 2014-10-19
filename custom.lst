@@ -1,0 +1,38 @@
+#
+# Useful resources for UBCD customization:
+#
+# - http://syslinux.zytor.com/wiki/index.php/The_SYSLINUX_Project
+# - http://www.ultimatebootcd.com/customize.html
+#
+
+color cyan/black black/light-gray green/black yellow/black
+color standard=light-gray/black border=blue/black
+
+title ..
+configfile /ubcd/menus/grub4dos/main.lst
+
+title Your own boot image here\n Your help message goes here.
+map --mem /ubcd/custom/boot.img (fd0)
+map --hook
+rootnoverify (fd0)
+chainloader +1
+
+# title Ubuntu 10.10 amd64
+# find --set-root /ubuntu/ubuntu-10.10-desktop-amd64.iso
+# map /ubuntu/ubuntu-10.10-desktop-amd64.iso (0xff)
+# map --hook
+# root (0xff)
+# kernel /casper/vmlinuz file=/cdrom/preseed/ubuntu.seed boot=casper persistent iso-scan/filename=/ubuntu/ubuntu-10.10-desktop-amd64.iso splash
+# initrd /casper/initrd.lz
+# 
+
+# based on http://diddy.boot-land.net/grub4dos/files/map.htm#hd32
+title debian 7.6 multi arch
+find --set-root /ubcd/custom/debian-7.6.0-amd64-i386-netinst.iso
+map /ubcd/custom/debian-7.6.0-amd64-i386-netinst.iso (hd32)
+map --hook
+root (hd32)
+chainloader (hd32)
+boot
+
+
