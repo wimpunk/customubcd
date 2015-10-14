@@ -39,6 +39,13 @@ of my USB stick called ubcd.img and created a vmdk by running
 I added this image to a pretty small virtual environment with only enough memory
 and the generated vmdk as disk.
 
+If you want to change anything in the image from outside a virtual machine
+you can mount it as a loop device on linux or use hdiutil on macosx:
+
+    hdiutil attach ubcd.img
+
+
+
 [1]: http://www.ultimatebootcd.com/
 [2]: http://www.ultimatebootcd.com/customize.html
 
