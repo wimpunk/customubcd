@@ -11,11 +11,11 @@ color standard=light-gray/black border=blue/black
 title ..
 configfile /ubcd/menus/grub4dos/main.lst
 
-title Your own boot image here\n Your help message goes here.
-map --mem /ubcd/custom/boot.img (fd0)
-map --hook
-rootnoverify (fd0)
-chainloader +1
+# title Your own boot image here\n Your help message goes here.
+# map --mem /ubcd/custom/boot.img (fd0)
+# map --hook
+# rootnoverify (fd0)
+# chainloader +1
 
 # title Ubuntu 10.10 amd64
 # find --set-root /ubuntu/ubuntu-10.10-desktop-amd64.iso
@@ -27,12 +27,35 @@ chainloader +1
 # 
 
 # based on http://diddy.boot-land.net/grub4dos/files/map.htm#hd32
-title debian 7.6 multi arch
-find --set-root /ubcd/custom/debian-7.6.0-amd64-i386-netinst.iso
-map /ubcd/custom/debian-7.6.0-amd64-i386-netinst.iso (hd32)
+# This one doesn't work
+# It can't find the CD
+title debian 8.0 multi arch\n Use it only as a rescue because it doesn't find the CD
+find --set-root /ubcd/custom/debian-8.0.0-amd64-i386-netinst.iso
+map /ubcd/custom/debian-8.0.0-amd64-i386-netinst.iso (hd32)
 map --hook
 root (hd32)
 chainloader (hd32)
 boot
 
+# http://ftp.debian.org/debian/dists/stable/main/installer-i386/current/images/hd-media/
+title Debian i386
+MENU LABEL Debian i386
+TEXT HELP
+ Install debian
+ENDTEXT
+COM32 linux.c32 /boot/syslinux/linux.c32 /boot/syslinux/memdisk
+INITRD /ubcd/custom/deb386.img.gz
+
+# I think I forgot something: https://wiki.archlinux.org/index.php/Multiboot_USB_drive#Live_install_medium
+title debian 7.8 amd64 rescue
+linux /ubcd/custom/live/vmlinuz
+initrd /ubcd/custom/live/initrd.img
+append boot=live config quiet splash
+
+#find --set-root /ubcd/custom/debian-live-7.8.0-amd64-rescue.iso
+#map --mem /ubcd/custom/debian-live-7.8.0-amd64-rescue.iso (hd32)
+#map --hook
+#root (hd32)
+#chainloader (hd32)
+#boot
 
