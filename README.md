@@ -27,6 +27,18 @@ To customize your stick, just copy the configuration files to the directory
 `ubcd/custom` on the stick.  Don't forget to add the needed iso images to
 stick.  Without the iso images, it really won't work.
 
+Testing
+=======
+
+You can test your configuration for example in virtual box.  I've created a dd
+of my USB stick called ubcd.img and created a vmdk by running
+
+    VBoxManage internalcommands createrawvmdk -filename ubcd.vmdk \
+       -rawdisk ubcd.img
+
+I added this image to a pretty small virtual environment with only enough memory
+and the generated vmdk as disk.
+
 [1]: http://www.ultimatebootcd.com/
 [2]: http://www.ultimatebootcd.com/customize.html
 
